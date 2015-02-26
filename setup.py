@@ -28,10 +28,15 @@
 """
 import os
 from setuptools import setup
+import sys
 
+PY_VERSION = sys.version_info[0], sys.version_info[1]
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    if PY_VERSION < (3, 0):
+        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    else:
+        return open(os.path.join(os.path.dirname(__file__), fname), encoding='utf-8').read()
 
 setup(
     name="microsofttranslator",
